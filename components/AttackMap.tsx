@@ -61,8 +61,12 @@ return(
 <ComposableMap projectionConfig={{ scale:140 }}>
 
 <Geographies geography={geoUrl}>
-{(data:any) =>
-data.geographies.map((geo:any)=>(
+{(geoData:any) => {
+
+const geographies = geoData.geographies
+
+return geographies.map((geo:any) => (
+
 <Geography
 key={geo.rsmKey}
 geography={geo}
@@ -70,8 +74,10 @@ fill="#083f35"
 stroke="#00ff9d55"
 strokeWidth={0.4}
 />
+
 ))
-}
+
+}}
 </Geographies>
 
 {attacks.map((attack,i)=>(
@@ -90,14 +96,18 @@ style={{ strokeDasharray:"6 6" }}
 {attacks.map((attack,i)=>(
 
 <Marker key={"s"+i} coordinates={attack.source.coords}>
+
 <circle r={4} fill="#ff0055">
+
 <animate
 attributeName="r"
 values="2;7;2"
 dur="1.2s"
 repeatCount="indefinite"
 />
+
 </circle>
+
 </Marker>
 
 ))}
@@ -105,14 +115,18 @@ repeatCount="indefinite"
 {attacks.map((attack,i)=>(
 
 <Marker key={"t"+i} coordinates={attack.target.coords}>
+
 <circle r={5} fill="#00ff9d">
+
 <animate
 attributeName="r"
 values="3;9;3"
 dur="1.4s"
 repeatCount="indefinite"
 />
+
 </circle>
+
 </Marker>
 
 ))}
