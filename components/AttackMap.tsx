@@ -8,14 +8,12 @@ Line,
 Marker
 } from "react-simple-maps"
 
-import {useEffect,useState} from "react"
+import { useEffect, useState } from "react"
 
 const geoUrl =
 "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
 
-
-const locations=[
-
+const locations = [
 { name:"USA", coords:[-100,40] },
 { name:"Germany", coords:[10,51] },
 { name:"India", coords:[78,22] },
@@ -24,17 +22,15 @@ const locations=[
 { name:"Brazil", coords:[-55,-10] },
 { name:"UK", coords:[-1,52] },
 { name:"Australia", coords:[133,-25] }
-
 ]
-
 
 export default function AttackMap(){
 
-const [attacks,setAttacks]=useState<any[]>([])
+const [attacks,setAttacks] = useState<any[]>([])
 
 useEffect(()=>{
 
-const interval=setInterval(()=>{
+const interval = setInterval(()=>{
 
 const source =
 locations[Math.floor(Math.random()*locations.length)]
@@ -42,15 +38,15 @@ locations[Math.floor(Math.random()*locations.length)]
 let target =
 locations[Math.floor(Math.random()*locations.length)]
 
-if(source===target) return
+if(source === target) return
 
-const attack={
+const attack = {
 source,
 target,
-id:Date.now()
+id: Date.now()
 }
 
-setAttacks(prev=>[...prev.slice(-8),attack])
+setAttacks(prev => [...prev.slice(-8), attack])
 
 },2000)
 
@@ -58,19 +54,17 @@ return ()=>clearInterval(interval)
 
 },[])
 
-
-
 return(
 
 <div className="h-[340px]">
 
-<ComposableMap projectionConfig={{scale:140}}>
+<ComposableMap projectionConfig={{ scale:140 }}>
 
 {/* WORLD MAP */}
 
 <Geographies geography={geoUrl}>
-{({geographies}) =>
-geographies.map((geo)=>(
+{({ geographies }: any) =>
+geographies.map((geo:any)=>(
 <Geography
 key={geo.rsmKey}
 geography={geo}
@@ -94,8 +88,7 @@ to={attack.target.coords}
 stroke="#00ff9d"
 strokeWidth={1.5}
 style={{
-strokeDasharray:"6 6",
-animation:"dash 4s linear infinite"
+strokeDasharray:"6 6"
 }}
 />
 
