@@ -1,11 +1,11 @@
 "use client"
 
 import {
-ComposableMap,
-Geographies,
-Geography,
-Line,
-Marker
+  ComposableMap,
+  Geographies,
+  Geography,
+  Line,
+  Marker
 } from "react-simple-maps"
 
 import { useEffect, useState } from "react"
@@ -60,11 +60,9 @@ return(
 
 <ComposableMap projectionConfig={{ scale:140 }}>
 
-{/* WORLD MAP */}
-
 <Geographies geography={geoUrl}>
-{({ geographies }: any) =>
-geographies.map((geo:any)=>(
+{(data:any) =>
+data.geographies.map((geo:any)=>(
 <Geography
 key={geo.rsmKey}
 geography={geo}
@@ -76,9 +74,6 @@ strokeWidth={0.4}
 }
 </Geographies>
 
-
-{/* ATTACK PATHS */}
-
 {attacks.map((attack,i)=>(
 
 <Line
@@ -87,53 +82,37 @@ from={attack.source.coords}
 to={attack.target.coords}
 stroke="#00ff9d"
 strokeWidth={1.5}
-style={{
-strokeDasharray:"6 6"
-}}
+style={{ strokeDasharray:"6 6" }}
 />
 
 ))}
 
-
-{/* SOURCE MARKERS */}
-
 {attacks.map((attack,i)=>(
 
 <Marker key={"s"+i} coordinates={attack.source.coords}>
-
 <circle r={4} fill="#ff0055">
-
 <animate
 attributeName="r"
 values="2;7;2"
 dur="1.2s"
 repeatCount="indefinite"
 />
-
 </circle>
-
 </Marker>
 
 ))}
 
-
-{/* TARGET MARKERS */}
-
 {attacks.map((attack,i)=>(
 
 <Marker key={"t"+i} coordinates={attack.target.coords}>
-
 <circle r={5} fill="#00ff9d">
-
 <animate
 attributeName="r"
 values="3;9;3"
 dur="1.4s"
 repeatCount="indefinite"
 />
-
 </circle>
-
 </Marker>
 
 ))}
